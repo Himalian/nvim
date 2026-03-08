@@ -15,15 +15,19 @@ vim.diagnostic.config({
 	underline = true,
 })
 
+vim.lsp.config.sourcekit = {
+	root_markers = { ".git", "Package.swift" },
+}
+
 vim.lsp.enable({
 	"clangd",
 	"lua_ls",
 	"pwsh",
 	"gopls",
-	"sourcekit",
+	"sourcekit-lsp",
 	"basedpyright",
 	"cue",
 	"nu",
-	"nil"
+	"nil",
 	-- "ty"
 })
