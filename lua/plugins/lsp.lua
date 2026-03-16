@@ -50,8 +50,10 @@ return {
 		{
 			"nvimdev/lspsaga.nvim",
 			-- event = "BufReadPost",
+			event = "LspAttach",
 			lazy = true,
 			dependencies = {
+				"mason-org/mason-lspconfig.nvim",
 				"nvim-treesitter/nvim-treesitter", -- optional
 				"nvim-tree/nvim-web-devicons", -- optional
 			},
