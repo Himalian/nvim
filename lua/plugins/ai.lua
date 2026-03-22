@@ -1,5 +1,106 @@
 return {
 	{
+		"yetone/avante.nvim",
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		-- ⚠️ must add this setting! ! !
+		build = vim.fn.has("win32") ~= 0
+				and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+			or "make",
+		event = "VeryLazy",
+		version = false, -- Never set this value to "*"! Never!
+		---@module 'avante'
+		---@type avante.Config
+		opts = {
+			-- add any opts here
+			-- this file can contain specific instructions for your project
+			instructions_file = { "AGENTS.md", "CLAUDE.md", "GEMINI.md" },
+			-- for example
+			--- @type "gemini-cli" | "claude-code" | "codex" | "opencode"
+			provider = "gemini-cli",
+			providers = {
+				openai = {
+					endpoint = "https://api.deepseek.com",
+					model = "deepseek-coder", -- 您想要的模型（或使用 gpt-4o 等）
+					timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
+					extra_request_body = {
+						temperature = 0,
+						max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+						reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+					},
+					max_tokens = 8192, -- 增加此值以包括推理模型的推理令牌
+					api_key_name = vim.env.DEEPSEEK_API_KEY,
+					--reasoning_effort = "medium", -- low|medium|high，仅用于推理模型
+				},
+			},
+
+			acp_providers = {
+				["gemini-cli"] = {
+					command = "gemini",
+					args = { "--acp" },
+				},
+				["claude-code"] = {
+					command = "bunx",
+					args = { "@zed-industries/claude-code-acp" },
+					env = {
+						NODE_NO_WARNINGS = "1",
+						-- ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY"),
+					},
+				},
+				["goose"] = {
+					command = "goose",
+					args = { "acp" },
+				},
+				["codex"] = {
+					command = "npx",
+					args = { "@zed-industries/codex-acp" },
+					env = {
+						NODE_NO_WARNINGS = "1",
+						-- OPENAI_API_KEY = os.getenv("OPENAI_API_KEY"),
+					},
+				},
+			},
+			-- other configuration options...
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"nvim-mini/mini.pick", -- for file_selector provider mini.pick
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"ibhagwan/fzf-lua", -- for file_selector provider fzf
+			"stevearc/dressing.nvim", -- for input provider dressing
+			"folke/snacks.nvim", -- for input provider snacks
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
+	{
 		"Exafunction/windsurf.nvim",
 		---@return boolean
 		cond = function()
@@ -23,6 +124,7 @@ return {
 	},
 	{
 		"Butterblock233/CLIAgents.nvim",
+		cond = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- Required for git operations
 		},
@@ -73,81 +175,6 @@ return {
 				},
 				window_navigation = true, -- Enable window navigation keymaps (<C-h/j/k/l>)
 				scrolling = true, -- Enable scrolling keymaps (<C-f/b>) for page up/down
-			},
-		},
-	},
-	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		cond = false,
-		version = false, -- 永远不要将此值设置为 "*"！永远不要！
-		opts = {
-			-- 在此处添加任何选项
-			-- 例如
-			vendors = {
-				openai = {
-					endpoint = "https://api.openai.com/v1",
-					model = "deepseek-coder", -- 您想要的模型（或使用 gpt-4o 等）
-					timeout = 30000, -- 超时时间（毫秒），增加此值以适应推理模型
-					temperature = 0,
-					max_tokens = 8192, -- 增加此值以包括推理模型的推理令牌
-					api_key_name = vim.env.OPENAI_API_KEY,
-					--reasoning_effort = "medium", -- low|medium|high，仅用于推理模型
-				},
-				deepseek = {
-					__inherited_from = "openai",
-					api_key_name = vim.env.DEEPSEEK_API_KEY,
-					endpoint = "https://api.deepseek.com",
-					model = "deepseek-coder",
-				},
-			},
-		},
-		-- 如果您想从源代码构建，请执行 `make BUILD_FROM_SOURCE=true`
-		-- build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- 对于 Windows
-		build = function()
-			if os.getenv("OS") == "Windows_NT" then
-				return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource true" -- 对于 Windows
-			else
-				return "make"
-			end
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- 以下依赖项是可选的，
-			-- "echasnovski/mini.pick", -- 用于文件选择器提供者 mini.pick
-			"nvim-telescope/telescope.nvim", -- 用于文件选择器提供者 telescope
-			"hrsh7th/nvim-cmp", -- avante 命令和提及的自动完成
-			-- "ibhagwan/fzf-lua", -- 用于文件选择器提供者 fzf
-			"nvim-tree/nvim-web-devicons", -- 或 echasnovski/mini.icons
-			-- "zbirenbaum/copilot.lua", -- 用于 providers='copilot'
-			{
-				-- 支持图像粘贴
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
-				opts = {
-					-- 推荐设置
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
-						},
-						-- Windows 用户必需
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				-- 如果您有 lazy=true，请确保正确设置
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
 			},
 		},
 	},
