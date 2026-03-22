@@ -1,7 +1,7 @@
 require("basic")
 require("functions")
 require("custom")
-require("indent")
+require("utils.indent")
 require("utils").dotenv.load(".env")
 require("lazy-nvim") -- Set up plugins
 require("theme")
