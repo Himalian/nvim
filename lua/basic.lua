@@ -126,3 +126,18 @@ if vim.fn.has("unix") == 1 then
 		vim.g.clipboard = clipboard_config
 	end
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		-- 检查 LSP 是否支持 hover
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client ~= nil and client:supports_method("textDocument/hover") then
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover({
+					--- @type 'rounded' | 'solid' | 'none' | 'bold' | 'double' | 'none' | 'shadow' | 'single'
+					border = "solid",
+				})
+			end, { buffer = args.buf, desc = "Hover documentation" })
+		end
+	end,
+})
