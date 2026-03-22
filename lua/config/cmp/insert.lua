@@ -9,6 +9,8 @@ function M.setup()
 
 	local cmp_sources = {
 		{ name = "nvim_lsp" },
+		{ name = "vim-dadbod-completion" },
+		-- { name = "cmp-dbee" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
