@@ -114,9 +114,8 @@ return {
 	},
 
 	{
-		"Butterblock233/project-enter.nvim",
+		"Himalian/project-enter.nvim",
 		event = "VeryLazy",
-		-- 如果在本地开发，请取消注释下面两行
 		-- dev = true,
 		-- dir = "~/src/Projects/project-enter.nvim",
 	},

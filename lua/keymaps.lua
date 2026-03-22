@@ -37,7 +37,11 @@ vim.keymap.set('n','<C-w>','<cmd>q<CR>') ]]
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
-vim.keymap.set("n", "f2", "<cmd>source ~/AppData/Local/nvim/init.lua<CR>", { desc = "重新加载配置" })
+
+
+-- Move original keymap <C-v> to <C-i>
+-- <C-q> is also an alternative due to historical reasons
+vim.keymap.set("i", "<C-i>", "<C-v>", { desc = "Literal Insert"})
 
 --插入模式下粘贴文本
 vim.keymap.set("i", "<C-v>", "<cmd>set paste<CR><C-R>*<cmd>set nopaste<CR>")
