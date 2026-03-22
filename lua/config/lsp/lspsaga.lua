@@ -1,14 +1,6 @@
 local M = {}
 M.opts = {
-	ui = {
-		-- code_action = '',
-	},
-	-- hover = {
-	-- 	max_width = 0.9,
-	-- 	max_height = 0.8,
-	-- 	open_link = 'gx',
-	-- 	open_cmd = '!chrome',
-	-- },
+	ui = {},
 	code_action = {
 		num_shortcut = true,
 		show_server_name = false,
@@ -20,6 +12,9 @@ M.opts = {
 			quit = "q",
 			exec = "<CR>",
 		},
+	},
+	outline = {
+		detail = false,
 	},
 	lightbulb = {
 		enable = false,
@@ -38,6 +33,6 @@ M.keys = {
 	{ "ga", "<cmd>Lspsaga code_action<CR>", mode = "n", desc = "Code Action" },
 	{ "gr", "<cmd>Lspsaga rename<CR>", mode = "n", desc = "Rename" },
 	{ "<f2>", "<cmd>Lspsaga rename<CR>", mode = "n", desc = "Rename" },
-	{"<leader>l","<cmd>Lspsaga outline<CR>", mode = {"n"} , desc = "Open outline"},
+	-- { "<leader>l", "<cmd>Lspsaga outline<CR>", mode = { "n" }, desc = "Open outline" },
 }
 return M

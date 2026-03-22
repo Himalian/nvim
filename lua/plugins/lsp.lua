@@ -49,7 +49,6 @@ return {
 		},
 		{
 			"nvimdev/lspsaga.nvim",
-			-- event = "BufReadPost",
 			event = "LspAttach",
 			lazy = true,
 			dependencies = {
@@ -59,6 +58,46 @@ return {
 			},
 			keys = lspsaga.keys,
 			opts = lspsaga.opts,
+		},
+		{
+			"stevearc/aerial.nvim",
+			keys = {
+				{ "<leader>l", "<cmd>AerialToggle!<CR>", mode = "n", desc = "Toggle LSP Outline" },
+			},
+			opts = {
+				{
+					layout = {
+						max_width = { 40, 0.2 },
+						width = 30,
+						min_width = 30,
+						placement = "right",
+						default_direction = "prefer_right",
+					},
+
+					attach_mode = "window",
+					highlight_on_hover = true,
+					autojump = false,
+
+					keymaps = {
+						["?"] = "actions.show_help",
+						["g?"] = "actions.show_help",
+						["<CR>"] = "actions.jump",
+						["e"] = "actions.jump",
+						["o"] = "actions.tree_toggle",
+						["v"] = "actions.jump_vsplit",
+						["s"] = "actions.jump_split",
+						["q"] = "actions.close",
+						["<Esc>"] = "actions.close",
+					},
+
+					icons = {},
+				},
+			},
+			-- Optional dependencies
+			dependencies = {
+				"nvim-treesitter/nvim-treesitter",
+				"nvim-tree/nvim-web-devicons",
+			},
 		},
 	},
 }
