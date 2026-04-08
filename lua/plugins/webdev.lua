@@ -18,4 +18,9 @@ return {
 			},
 		},
 	},
+	{
+		"heavenshell/vim-jsdoc",
+		enabled = false,
+		ft = { "typescript", "javascript", "jsx", "tsx" },
+	},
 }
