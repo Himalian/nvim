@@ -1,41 +1,32 @@
 return {
 	{
 		"olimorris/persisted.nvim",
-		lazy = true,
-		cond = true,
-		-- event = "VeryLazy",
-		cmd = {"SessionLoad","SessionSave","SessionSelect","SessionDelete","SessionLoadLast"},
+		lazy = false,
 		dependencies = { "nvim-telescope/telescope.nvim" },
-		config = function()
-			require("persisted").setup({
-				save_dir = vim.fn.stdpath("data") .. "persisted/sessions/", -- 默认会话存储路径
-				autoload = false, -- 启动时自动加载最近会话
-				autosave = true, -- 自动保存会话
-			})
-			-- Telescope 集成
+		opts = {
+			autostart = true,
+			autoload = false,
+			autosave = true,
+			save_dir = vim.fn.stdpath("data") .. "/persisted/sessions/",
+			use_git_branch = false,
+		},
+		config = function(_, opts)
+			require("persisted").setup(opts)
 			require("telescope").load_extension("persisted")
 		end,
 		keys = {
-			{ "<leader>qs", "<cmd>SessionLoad<CR>", desc = "Load the session for current directory" },
-			-- { "<leader>qS", "<cmd>Telescope persisted<CR>",   desc = "Select a session to  load" } ,
-			{ "<leader>qS", "<cmd>SessionSelect<CR>", desc = "Select a session to  load" },
-			{ "<leader>ql", "<cmd>SessionLoadLast<CR>", desc = "Load last session" },
-			{ "<leader>qw", "<cmd>SessionSave<CR>", desc = "Save current session" },
-
-			{ "<leader>qd", "<cmd>SessionDelete<CR>", desc = "Delete current session" },
-			{
-				mode = "n",
-				"<leader>fs",
-				"<cmd>Telescope persisted<CR>",
-				desc = "Telescope find sessions",
-			},
+			{ "<leader>qs", "<cmd>Persisted load<CR>", desc = "Load session for current directory" },
+			{ "<leader>qS", "<cmd>Persisted select<CR>", desc = "Select session to load" },
+			{ "<leader>ql", "<cmd>Persisted load_last<CR>", desc = "Load last session" },
+			{ "<leader>qw", "<cmd>Persisted save<CR>", desc = "Save current session" },
+			{ "<leader>qd", "<cmd>Persisted delete<CR>", desc = "Delete current session" },
+			{ "<leader>fs", "<cmd>Telescope persisted<CR>", desc = "Telescope find sessions" },
 		},
 	},
-	-- Lua
 	{
 		"folke/persistence.nvim",
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
-		cond = false,
+		enabled = false,
 		opts = {
 			-- add any custom options here
 			{
