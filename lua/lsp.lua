@@ -10,9 +10,11 @@ vim.lsp.config("*", {
 })
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = false,
+	virtual_lines = true,
 	signs = true,
 	underline = true,
+	update_in_insert = true,
 })
 
 vim.lsp.config.sourcekit = {
