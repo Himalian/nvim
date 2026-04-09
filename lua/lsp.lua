@@ -21,6 +21,10 @@ vim.lsp.config.sourcekit = {
 	root_markers = { ".git", "Package.swift" },
 }
 
+-- check for details:
+-- https://neovim.io/doc/user/lsp/#lsp-document_color
+-- https://notebooklm.google.com/notebook/dbfb47bb-5b82-4f5d-be12-702d5067dc2c
+vim.lsp.document_color.enable(true, nil, { style = "virtual" })
 vim.lsp.enable({
 	"clangd",
 	"lua_ls",
