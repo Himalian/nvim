@@ -29,11 +29,14 @@ function M.setup(_, opts)
 		callback = function(args)
 			local bufnr = args.buf
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			local blacklist = { "null-ls" } -- 扩展黑名单
+			if not client then
+				return
+			end
+			local blacklist = {} -- blacklist
 			if vim.tbl_contains(blacklist, client.name) then
 				return
 			end
-			require("lsp_signature").on_attach(opts, bufnr) -- 确保 opts 传递
+			require("lsp_signature").on_attach(opts, bufnr)
 		end,
 	})
 end
@@ -47,19 +50,23 @@ function M.toggle_float_win()
 end
 M.opts = {
 	bind = true,
-	floating_window = false, -- 默认启用浮动窗口
+	floating_window = false,
 	hint_enable = true,
-	hint_prefix = "󰌶 ",
+	hint_prefix = "",
+	-- hint_prefix = "󰌶 ",
+
+	--- @type "String" | "Comment"
 	hint_scheme = "Comment",
 	hi_parameter = "Search",
 	handler_opts = {
 		border = "rounded",
 	},
-	always_trigger = true, -- 强制触发
-	update_on_insert = true, -- 输入时更新
+	always_trigger = true,
+	update_on_insert = true,
 	check_completion_visible = true,
 	max_width = 80,
 	wrap = true,
+	select_signature_key = "<M-n>",
 }
 
 return M
