@@ -22,7 +22,7 @@ function M.setup()
 	end
 
 	cmp.setup({
-		--默认选择第一项
+		-- Select first by default
 		preselect = types.cmp.PreselectMode.Item,
 		completion = {
 			completeopt = "menu,menuone,noinsert",
@@ -51,6 +51,12 @@ function M.setup()
 					if highlights_info ~= nil then
 						vim_item.abbr_hl_group = highlights_info.highlights
 						vim_item.abbr = highlights_info.text
+					end
+
+					-- Tailwindcss color preview
+					local has_tailwind, tailwind_colorizer = pcall(require, "tailwindcss-colorizer-cmp")
+					if has_tailwind then
+						vim_item = tailwind_colorizer.formatter(entry, vim_item)
 					end
 
 					-- Source Aliases
