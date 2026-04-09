@@ -176,4 +176,15 @@ return {
 		},
 		config = true,
 	},
+	{
+		"tronikelis/ts-autotag.nvim",
+		lazy = true,
+		enabled = false,
+	},
+	{
+		"m4xshen/autoclose.nvim",
+		lazy = true,
+		enabled = true,
+		opts = {},
+	},
 }
