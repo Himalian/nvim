@@ -1,5 +1,5 @@
 local lspsaga = require("config.lsp.lspsaga")
-local conf = require("config.lsp.lsp_signature")
+local lsp_signature = require("config.lsp.lsp_signature")
 
 return {
 	{
@@ -19,12 +19,12 @@ return {
 	},
 	{
 		"ray-x/lsp_signature.nvim",
-		cond = false,
+		cond = true,
 		event = "InsertEnter",
-		opts = conf.opts,
-		keys = conf.keys,
+		opts = lsp_signature.opts,
+		-- keys = lsp_signature.keys,
 		config = function()
-			require("lsp_signature").setup(conf.opts)
+			require("lsp_signature").setup(lsp_signature.opts)
 			-- require("lsp_signature").on_attach(conf.on_attach
 		end,
 	},
