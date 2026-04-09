@@ -37,26 +37,15 @@ vim.keymap.set('n','<C-w>','<cmd>q<CR>') ]]
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
-
-
 -- Move original keymap <C-v> to <C-i>
 -- <C-q> is also an alternative due to historical reasons
-vim.keymap.set("i", "<C-i>", "<C-v>", { desc = "Literal Insert"})
+vim.keymap.set("i", "<C-i>", "<C-v>", { desc = "Literal Insert" })
 
 --插入模式下粘贴文本
 vim.keymap.set("i", "<C-v>", "<cmd>set paste<CR><C-R>*<cmd>set nopaste<CR>")
 
 vim.keymap.set("n", "<leader>st", "<cmd>Lazy profile<CR>")
 
-vim.keymap.set("n", "<leader>ih", function()
-	if not vim.lsp.inlay_hint.is_enabled() then
-		vim.lsp.inlay_hint.enable(true)
-		vim.print("Inlay hint enabled")
-	else
-		vim.lsp.inlay_hint.enable(false)
-		vim.print("Inlay hint disabled")
-	end
-end, { desc = "Toggle inlay_hint" })
 -- vim.keymap.set('n', '<leader>f','')
 --
 -- -- Terminal
@@ -75,6 +64,17 @@ end, { desc = "Toggle inlay_hint" })
 -- Command mode
 -- vim.keymap.set('c',"<CR>",'') --你小子害人不浅
 -- vim.keymap.set('c','','')
+
+-- Treesitter incremental selection
+vim.keymap.set("n", "<CR>", function()
+	require("utils.ts-selection").increment_selection()
+end)
+vim.keymap.set("x", "<CR>", function()
+	require("utils.ts-selection").increment_selection()
+end)
+vim.keymap.set("x", "<S-CR>", function()
+	require("utils.ts-selection").decrement_selection()
+end)
 
 vim.keymap.set("v", "<leader>y", require("utils.select").copy_with_content, { desc = "copy text with content" })
 
