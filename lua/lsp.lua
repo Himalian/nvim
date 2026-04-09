@@ -31,5 +31,6 @@ vim.lsp.enable({
 	"cue",
 	"nu",
 	"nil",
+	"biome",
 	-- "ty"
 })
