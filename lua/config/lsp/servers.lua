@@ -11,6 +11,8 @@ function M.setup()
 		"nu",
 		"nil",
 		"biome",
+		"mojo",
+		"vtsls-server",
 		-- "ty"
 	})
 end

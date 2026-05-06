@@ -14,7 +14,7 @@ return {
 		end,
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = require("config.lsp.mason").opts },
-			{ "neovim/nvim-lspconfig", keys = require("config.lsp.lspconfig").keymaps },
+			{ "neovim/nvim-lspconfig", event = "VeryLazy", keys = require("config.lsp.lspconfig").keymaps },
 		},
 	},
 	{
