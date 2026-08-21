@@ -10,5 +10,15 @@ function M.setup()
 	M.servers.setup()
 	M.keymaps.setup()
 end
+local default_signature_help = vim.lsp.handlers["textDocument/signatureHelp"]
+
+vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, config)
+    if err then
+        return
+    end
+    if default_signature_help then
+        return default_signature_help(err, result, ctx, config)
+    end
+end
 
 return M
