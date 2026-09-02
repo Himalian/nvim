@@ -57,17 +57,17 @@ end
 ---@param filename string
 ---@param path string | nil
 function dotenv.load(filename, path)
-	-- Use .env as the default filename if not provided
 	filename = filename or ".env"
-	-- Use the current directory as the default path if not provided
-	path = path or vim.fn.stdpath('config')
-	-- 判断 filename 是否为绝对路径
-	local full_path
-	if filename:sub(1,1) == "/" then
-		full_path = filename
-	else
-		full_path = path .. "/" .. filename
+	path = path or vim.fn.stdpath("config")
+	local full_path = vim.fs.abspath(vim.fs.joinpath(path,filename))
+	-- check file exists before read
+	if not vim.uv.fs_stat(full_path) then
+		vim.schedule(function()
+			vim.notify("environment file " .. vim.fs.normalize(full_path) .. " not found", vim.log.levels.WARN)
+		end)
+		return
 	end
+
 	-- Read the file content
 	local content, err = readFile(full_path)
 	-- Check if there was an error

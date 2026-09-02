@@ -1,7 +1,6 @@
 --- custon.lua
 ---
 --- load custom configurations on startup
-require("utils.dotenv").load(".env")
 -- vim.o.guifont = vim.env.NVIM_GUI_FONT
 vim.o.guifontwide = vim.env.NVIM_GUI_FONT_WIDE
 
