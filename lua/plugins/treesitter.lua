@@ -24,9 +24,19 @@ return {
 
 			-- Enable highlighting per filetype (no longer automatic)
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = languages,
-				callback = function()
-					vim.treesitter.start()
+				pattern = "*",
+				callback = function(args)
+					if vim.bo[args.buf].buftype ~= "" or vim.bo[args.buf].filetype == "" then
+						return
+					end
+
+					local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+					if not lang then
+						return
+					end
+
+					-- ignore errors
+					pcall(vim.treesitter.start, args.buf, lang)
 				end,
 			})
 
