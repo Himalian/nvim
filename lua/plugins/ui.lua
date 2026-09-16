@@ -204,6 +204,13 @@ return {
 					color = "#38bdf8",
 					cterm_color = 74,
 				},
+				cs = {
+					icon = "󰌛",
+					name = "Cs",
+					color = "#7355dd",
+					cterm_color = 56
+				}
+
 			},
 		},
 	},
