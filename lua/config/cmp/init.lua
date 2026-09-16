@@ -4,6 +4,6 @@ local M = {}
 
 function M.setup()
 	insert.setup()
-	cmdline.setup()
+	-- cmdline.setup()
 end
 return M
