@@ -4,9 +4,7 @@ function M.setup()
 	vim.lsp.config("*", {
 		capabilities = {
 			textDocument = {
-				semanticTokens = {
-					multilineTokenSupport = true,
-				},
+				-- semanticTokens = {},
 			},
 		},
 		root_markers = { ".git" },
@@ -26,7 +24,6 @@ function M.setup()
 
 	-- check for details:
 	-- https://neovim.io/doc/user/lsp/#lsp-document_color
-	-- https://notebooklm.google.com/notebook/dbfb47bb-5b82-4f5d-be12-702d5067dc2c
 	vim.lsp.document_color.enable(true, nil, { style = "virtual" })
 end
 
