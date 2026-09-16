@@ -9,6 +9,7 @@ function M.setup()
 	M.config.setup()
 	M.servers.setup()
 	M.keymaps.setup()
+	require("config.lsp.roslyn").setup()
 end
 local default_signature_help = vim.lsp.handlers["textDocument/signatureHelp"]
 

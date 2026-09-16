@@ -4,9 +4,7 @@ function M.setup()
 	vim.lsp.config("*", {
 		capabilities = {
 			textDocument = {
-				semanticTokens = {
-					multilineTokenSupport = true,
-				},
+				-- semanticTokens = {},
 			},
 		},
 		root_markers = { ".git" },
