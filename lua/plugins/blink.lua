@@ -9,6 +9,9 @@ return {
 	version = "1.*",
 
 	opts = {
+		enabled = function()
+			return vim.fn.mode() == "c"
+		end,
 		cmdline = {
 			keymap = {
 				["<Tab>"] = { "show", "accept" },
