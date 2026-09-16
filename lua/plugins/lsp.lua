@@ -99,5 +99,14 @@ return {
 				"nvim-tree/nvim-web-devicons",
 			},
 		},
+		{
+			"seblyng/roslyn.nvim",
+			enable = false,
+			---@module 'roslyn.config'
+			---@type RoslynNvimConfig
+			opts = {
+				-- your configuration comes here; leave empty for default settings
+			},
+		},
 	},
 }

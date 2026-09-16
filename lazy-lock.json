@@ -79,6 +79,7 @@
   "poimandres.nvim": { "branch": "main", "commit": "a488957d803943a4201ac3b774913fcafa9e6b3a" },
   "project-enter.nvim": { "branch": "main", "commit": "51334329d0d21529caf11a162e65f43efdfa20f0" },
   "render-markdown.nvim": { "branch": "main", "commit": "54d4b5431e9634ee3d8d30784e017239b5b89d41" },
+  "roslyn.nvim": { "branch": "main", "commit": "bf1bd4e70bc7068d1b4aebf4ce03cc19a86615be" },
   "snacks.nvim": { "branch": "main", "commit": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tailwindcss-colorizer-cmp.nvim": { "branch": "main", "commit": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86" },
