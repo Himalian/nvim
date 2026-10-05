@@ -101,12 +101,20 @@ return {
 		},
 		{
 			"seblyng/roslyn.nvim",
-			enable = false,
+			enabled = false,
 			---@module 'roslyn.config'
 			---@type RoslynNvimConfig
 			opts = {
 				-- your configuration comes here; leave empty for default settings
 			},
+		},
+		{
+			"Sunrisepeak/mcpp-language-server",
+			event = "User ProjectEnter mcpp.toml",
+			config = function(plugin)
+				vim.opt.rtp:append(plugin.dir .. "/editors/nvim")
+				require("mcppls").setup()
+			end,
 		},
 	},
 }
