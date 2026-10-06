@@ -2,6 +2,7 @@ local M = {}
 function M.setup()
 	vim.lsp.enable({
 		"clangd",
+		"mcppls",
 		"lua_ls",
 		"pwsh",
 		"gopls",
@@ -12,8 +13,6 @@ function M.setup()
 		"nil",
 		"biome",
 		"mojo",
-		"vtsls-server",
-		-- "ty"
 	})
 end
 return M
