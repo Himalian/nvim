@@ -56,6 +56,12 @@ return {
 				end,
 				desc = "Toggle Terminal",
 			},
+			{
+				"<leader>gd",
+				function ()
+					require("snacks").picker.lsp_definitions()
+				end
+			}
 		},
 		opts = {
 			-- 你的配置选项

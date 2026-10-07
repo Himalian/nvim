@@ -62,7 +62,7 @@ return {
 		{
 			"stevearc/aerial.nvim",
 			keys = {
-				{ "<leader>l", "<cmd>AerialToggle!<CR>", mode = "n", desc = "Toggle LSP Outline" },
+				{ "<leader>ll", "<cmd>AerialToggle!<CR>", mode = "n", desc = "Toggle LSP Outline" },
 			},
 			opts = {
 				{
@@ -111,6 +111,7 @@ return {
 		{
 			"Sunrisepeak/mcpp-language-server",
 			event = "User ProjectEnter mcpp.toml",
+			cond = false,
 			config = function(plugin)
 				vim.opt.rtp:append(plugin.dir .. "/editors/nvim")
 				require("mcppls").setup()
