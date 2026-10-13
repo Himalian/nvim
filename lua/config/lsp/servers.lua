@@ -2,7 +2,7 @@ local M = {}
 function M.setup()
 	vim.lsp.enable({
 		"clangd",
-		"mcppls",
+		-- "mcppls",
 		"lua_ls",
 		"pwsh",
 		"gopls",
