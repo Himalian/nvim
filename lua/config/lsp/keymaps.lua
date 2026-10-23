@@ -4,7 +4,7 @@ local snacks = require("snacks")
 function M.setup()
 	vim.keymap.set("n", "gD", snacks.picker.lsp_declarations, { desc = "Go to declaration" })
 	vim.keymap.set("n", "gd", snacks.picker.lsp_definitions, { desc = "Go to definition" })
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show infomation" })
+	vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Show infomation" })
 	vim.keymap.set("n", "gI", snacks.picker.lsp_implementations, { desc = "Go to implementation" })
 	vim.keymap.set("n", "gR", snacks.picker.lsp_references, { desc = "View references" })
 

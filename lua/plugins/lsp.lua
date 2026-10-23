@@ -58,7 +58,17 @@ return {
 			"nvim-tree/nvim-web-devicons", -- optional
 		},
 		keys = lspsaga.keys,
-		opts = lspsaga.opts,
+		config = function()
+			require("lspsaga").setup(require("config.lsp.lspsaga").opts)
+			-- vim.api.nvim_create_autocmd("ColorScheme", {
+			-- 	callback = function()
+			-- 		local bg = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false }).bg
+			-- 			or vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg
+			--
+			-- 		vim.api.nvim_set_hl(0, "HoverBorder", { fg = bg, bg = bg })
+			-- 	end,
+			-- })
+		end,
 	},
 	{
 		"stevearc/aerial.nvim",
