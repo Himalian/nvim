@@ -9,7 +9,7 @@ if vim.env.PWSH == "true" or vim.env.SHELL == "pwsh" then
 	vim.o.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
 	vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command "
 		.. "[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();"
-		.. " $PSStyle.OutputRendering = 'PlainText' "
+		.. " $PSStyle.OutputRendering = 'PlainText'; "
 	-- .. "$PSDefaultParameterValues['Out-File:Encoding]=UTF8;"
 
 	vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s"
