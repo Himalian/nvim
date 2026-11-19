@@ -122,7 +122,7 @@ return {
 	{
 		"Sunrisepeak/mcpp-language-server",
 		event = "User ProjectEnter mcpp.toml",
-		cond = true,
+		cond = false,
 		config = function(plugin)
 			vim.opt.rtp:append(plugin.dir .. "/editors/nvim")
 			require("mcppls").setup({

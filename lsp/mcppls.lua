@@ -18,6 +18,9 @@ return {
 	init_options = {
 		conflictArbitration = "client",
 	},
+	on_attatch = function(client)
+		client.server_capabilities.semanticTokensProvider = nil
+	end,
 	root_dir = function(bufnr, on_dir)
 		-- Only activate mcppls when mcpp.toml is present
 		if has_mcpp(bufnr) then
@@ -26,4 +29,3 @@ return {
 		end
 	end,
 }
-
